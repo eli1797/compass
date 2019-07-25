@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 import { DeviceOrientation, DeviceOrientationCompassHeading } from '@ionic-native/device-orientation/ngx';
-import { AngularDelegate } from '@ionic/angular';
 import { BearingService } from '../bearing.service';
 
 @Component({
@@ -16,13 +16,24 @@ export class HomePage implements OnInit {
   magneticHeading: any;
   trueHeading: any;
 
-  constructor(private deviceOrientation: DeviceOrientation, public bearingSerivce: BearingService) {
+  constructor(private deviceOrientation: DeviceOrientation, public bearingSerivce: BearingService,  public platform: Platform) {
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      this.bearingSerivce.subscribe();
+      this.bearingSerivce.logOrientation();
+    });
   }
 
   ngOnInit() {
     this.logOrientation();
     this.bearingSerivce.setMyLat(36);
     this.bearingSerivce.setMyLong(-86);
+
+    // await this.bearingSerivce.subscribe();
+    console.log('Bearing service magnetic heading');
+    console.log(this.bearingSerivce.getMagneticHeading());
+    console.log(this.bearingSerivce.logOrientation());
   }
 
   logOrientation() {
@@ -30,6 +41,7 @@ export class HomePage implements OnInit {
   this.deviceOrientation.getCurrentHeading().then((heading) => {
     this.magneticHeading = heading.magneticHeading;
     this.trueHeading = heading.trueHeading;
+    console.log(this.magneticHeading, this.trueHeading);
   }, (err) => {
     console.log(err);
   });
