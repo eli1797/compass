@@ -7,8 +7,14 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-label>Lat, Long = {{ latLongHardcoded }}</ion-label>
+  
+  <ion-button (click)="logOrientation()" expand="full"> Log Orientation</ion-button><br>
+
+  <ion-label>Magnetic Heading: {{ magneticHeading }}</ion-label><br>
+  <ion-label>True Heading: {{ trueHeading }}</ion-label><br><br>
+
+  <ion-button (click)="subscribe()" expand="full"> Watch Orientation</ion-button><br>
+
+  <ion-button (click)="unsubscribe()" expand="full"> Stop Watching Orientation</ion-button><br>
 </ion-content>
