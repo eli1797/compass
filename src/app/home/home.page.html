@@ -7,7 +7,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-label>Lat, Long = {{ latLongHardcoded }}</ion-label>
+  <ion-label>My Lat = {{ bearingSerivce.getMyLat() }}</ion-label><br>
+  <ion-label>My Long = {{ bearingSerivce.getMyLong() }}</ion-label><br>
   
   <ion-button (click)="logOrientation()" expand="full"> Log Orientation</ion-button><br>
 

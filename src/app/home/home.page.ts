@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { DeviceOrientation, DeviceOrientationCompassHeading } from '@ionic-native/device-orientation/ngx';
 import { AngularDelegate } from '@ionic/angular';
+import { BearingService } from '../bearing.service';
 
 @Component({
   selector: 'app-home',
@@ -15,13 +16,13 @@ export class HomePage implements OnInit {
   magneticHeading: any;
   trueHeading: any;
 
-  latLongHardcoded: any = '34, -86';
-
-  constructor(private deviceOrientation: DeviceOrientation) {
+  constructor(private deviceOrientation: DeviceOrientation, public bearingSerivce: BearingService) {
   }
 
   ngOnInit() {
     this.logOrientation();
+    this.bearingSerivce.setMyLat(36);
+    this.bearingSerivce.setMyLong(-86);
   }
 
   logOrientation() {
@@ -32,9 +33,6 @@ export class HomePage implements OnInit {
   }, (err) => {
     console.log(err);
   });
-  //   (data: DeviceOrientationCompassHeading) => console.log(data),
-  //   (error: any) => console.log(error)
-  // );
   }
 
   subscribe() {
@@ -52,6 +50,11 @@ export class HomePage implements OnInit {
   this.subscription.unsubscribe();
   this.magneticHeading = '';
   this.trueHeading = '';
+  }
+
+  direct() {
+    // this.bearingSerivce.setTheirLat
+    console.log('Called direct');
   }
 
 }

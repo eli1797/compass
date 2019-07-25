@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { DeviceOrientation } from '@ionic-native/device-orientation/ngx';
+import { BearingService } from './bearing.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,8 @@ import { DeviceOrientation } from '@ionic-native/device-orientation/ngx';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    DeviceOrientation
+    DeviceOrientation,
+    BearingService
   ],
   bootstrap: [AppComponent]
 })
