@@ -22,8 +22,8 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.bearingSerivce.setMyLat(36);
-    this.bearingSerivce.setMyLong(-86);
+    this.bearingSerivce.setTheirLat(33.76);
+    this.bearingSerivce.setTheirLong(-84.37);
 
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
