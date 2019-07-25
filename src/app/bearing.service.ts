@@ -12,18 +12,34 @@ export class BearingService {
   myLat: number;
   myLong: number;
 
-  myMagHeading: number;
-
   theirLat: number;
   theirLong: number;
 
-  // bearing
+  // subscription to device orientation
   subscription;
 
-  magneticHeading: any;
-  trueHeading: any;
+  //bearing
+  magneticHeading: number;
+  trueHeading: number;
+  navBearing: number;
 
   constructor(private deviceOrientation: DeviceOrientation, private geoLocation: Geolocation) {}
+
+  calculateBearing() {
+    // check if all the required variables are defined
+    // believe this fails if at 0
+    if (this.myLat && this.myLong && this.theirLat && this.theirLong && this.magneticHeading) {
+
+      // formula is correct (I believe) after converting to radians
+      const longDif = (this.theirLong - this.myLong) * (Math.PI / 180);
+      const y = Math.sin(longDif) * Math.cos(this.theirLat * (Math.PI / 180));
+      const x = Math.cos(this.myLat * (Math.PI / 180)) * Math.sin(this.theirLat * (Math.PI / 180)) - Math.sin(this.myLat * (Math.PI / 180)) * Math.cos(this.theirLat * (Math.PI / 180)) * Math.cos(longDif);
+      const degBearing = Math.atan2(y, x) * (180 / Math.PI);
+
+      this.navBearing = degBearing;
+      console.log(this.navBearing);
+    }
+  }
 
   logOrientation() {
     // Get the device current compass heading
@@ -68,8 +84,8 @@ export class BearingService {
   unsubscribeOrientation() {
   // Stop watching heading change
   this.subscription.unsubscribe();
-  this.magneticHeading = '';
-  this.trueHeading = '';
+  this.magneticHeading = NaN;
+  this.trueHeading = NaN;
   }
 
   unsubscribeLocation() {
@@ -112,14 +128,4 @@ export class BearingService {
   public setTheirLong(value: number) {
     this.theirLong = value;
   }
-
-  public geyMyMagHeading(): number {
-    return this.myMagHeading;
-  }
-
-  public setMyMagHeading(value: number) {
-    this.myMagHeading = value;
-  }
-
-
 }
