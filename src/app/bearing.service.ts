@@ -22,6 +22,7 @@ export class BearingService {
   magneticHeading: number;
   trueHeading: number;
   navBearing: number;
+  navDistance: number;
 
   constructor(private deviceOrientation: DeviceOrientation, private geoLocation: Geolocation) {}
 
@@ -37,7 +38,28 @@ export class BearingService {
       const degBearing = Math.atan2(y, x) * (180 / Math.PI);
 
       this.navBearing = degBearing;
-      console.log(this.navBearing);
+      console.log("Bearing: ", this.navBearing);
+    }
+  }
+
+  calculateDistance() {
+    // haversine distance
+    if (this.myLat && this.myLong && this.theirLat && this.theirLong) {
+      const earthRadius = 6371e3; // meters
+      const φ1 = this.myLat * (Math.PI / 180);
+      const φ2 = this.theirLat * (Math.PI / 180);
+      const Δφ = (this.theirLat - this.myLat) * (Math.PI / 180);
+      const Δλ = (this.theirLong - this.myLong) * (Math.PI / 180);
+
+      const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+              Math.cos(φ1) * Math.cos(φ2) *
+              Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+      const d = earthRadius * c;
+
+      this.navDistance = d;
+      console.log("Distance: ", this.navDistance);
     }
   }
 

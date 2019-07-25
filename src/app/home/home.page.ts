@@ -46,4 +46,9 @@ export class HomePage implements OnInit {
     this.bearingSerivce.unsubscribeLocation();
   }
 
+  calculateStats() {
+    this.bearingSerivce.calculateBearing();
+    this.bearingSerivce.calculateDistance();
+  }
+
 }

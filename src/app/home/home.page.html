@@ -12,7 +12,7 @@
   <ion-label>My Lat = {{ this.bearingSerivce.getMyLat() }}</ion-label><br>
   <ion-label>My Long = {{ this.bearingSerivce.getMyLong() }}</ion-label><br>
   
-  <ion-button (click)="this.bearingSerivce.logOrientation()" expand="full"> Log Orientation</ion-button><br>
+  <ion-button (click)="this.bearingSerivce.logOrientation()" expand="full"> Log Orientation & Loc</ion-button><br>
 
   <ion-label>Magnetic Heading: {{ this.bearingSerivce.magneticHeading }}</ion-label><br>
   <ion-label>True Heading: {{ this.bearingSerivce.trueHeading }}</ion-label><br><br>
@@ -21,6 +21,7 @@
 
   <ion-button (click)="stopWatching()" expand="full"> Stop Watching Orientation & Loc</ion-button><br><br><br>
 
-  <ion-label> Calc Bearing = {{ this.bearingSerivce.navBearing }}</ion-label><br>
-  <ion-button (click)="this.bearingSerivce.calculateBearing()" expand="full"> Calculate Bearing </ion-button><br>
+  <ion-label> Calculated Bearing: {{ this.bearingSerivce.navBearing }}deg</ion-label><br>
+  <ion-label> Calculated Distance: {{ this.bearingSerivce.navDistance }}m</ion-label><br>
+  <ion-button (click)="calculateStats()" expand="full"> Calculate Bearing </ion-button><br>
 </ion-content>
