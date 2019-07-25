@@ -15,7 +15,7 @@
   <ion-label>Magnetic Heading: {{ this.bearingSerivce.magneticHeading }}</ion-label><br>
   <ion-label>True Heading: {{ this.bearingSerivce.trueHeading }}</ion-label><br><br>
 
-  <ion-button (click)="this.bearingSerivce.subscribe()" expand="full"> Watch Orientation</ion-button><br>
+  <ion-button (click)="watchMe()" expand="full"> Watch Orientation</ion-button><br>
 
-  <ion-button (click)="this.bearingSerivce.unsubscribe()" expand="full"> Stop Watching Orientation</ion-button><br>
+  <ion-button (click)="stopWatching()" expand="full"> Stop Watching Orientation</ion-button><br>
 </ion-content>

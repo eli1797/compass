@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 
 import { DeviceOrientation, DeviceOrientationCompassHeading } from '@ionic-native/device-orientation/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class BearingService {
   magneticHeading: any;
   trueHeading: any;
 
-  constructor(private deviceOrientation: DeviceOrientation) {}
+  constructor(private deviceOrientation: DeviceOrientation, private geoLocation: Geolocation) {}
 
   logOrientation() {
     // Get the device current compass heading
@@ -35,7 +36,26 @@ export class BearingService {
     });
   }
 
-  subscribe() {
+  logLocation() {
+    this.geoLocation.getCurrentPosition().then((resp) => {
+      this.myLat = resp.coords.latitude;
+      this.myLong = resp.coords.longitude;
+      console.log(this.myLat, this.myLong);
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+  }
+
+  subscribeLocation() {
+    let watch = this.geoLocation.watchPosition();
+      watch.subscribe((data) => {
+      // data can be a set of coordinates, or an error (if an error occurred).
+      this.myLat = data.coords.latitude;
+      this.myLong = data.coords.longitude;
+      });
+  }
+
+  subscribeOrientation() {
   // Watch the device compass heading change
   this.subscription = this.deviceOrientation.watchHeading().subscribe((heading) => {
       this.magneticHeading = heading.magneticHeading;
@@ -45,11 +65,16 @@ export class BearingService {
     });
   }
 
-  unsubscribe() {
+  unsubscribeOrientation() {
   // Stop watching heading change
   this.subscription.unsubscribe();
   this.magneticHeading = '';
   this.trueHeading = '';
+  }
+
+  unsubscribeLocation() {
+    this.myLat = NaN;
+    this.myLong = NaN;
   }
 
   public getMagneticHeading(): number {

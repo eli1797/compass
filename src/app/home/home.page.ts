@@ -25,18 +25,25 @@ export class HomePage implements OnInit {
     this.bearingSerivce.setMyLat(36);
     this.bearingSerivce.setMyLong(-86);
 
-    // await this.bearingSerivce.subscribe();
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.bearingSerivce.subscribe();
       this.bearingSerivce.logOrientation();
+      this.bearingSerivce.subscribeOrientation();
+      
+      this.bearingSerivce.logLocation();
+      this.bearingSerivce.subscribeLocation();
     });
   }
 
-  direct() {
-    // this.bearingSerivce.setTheirLat
-    console.log('Called direct');
+  watchMe() {
+    this.bearingSerivce.subscribeOrientation();
+    this.bearingSerivce.subscribeLocation();
+  }
+
+  stopWatching() {
+    this.bearingSerivce.unsubscribeOrientation();
+    this.bearingSerivce.unsubscribeLocation();
   }
 
 }
