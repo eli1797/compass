@@ -38,8 +38,35 @@ export class LocationService {
     });
   }
 
+  /**
+   * This function calculates the distance between locations accounting for earths curvature
+   * @param myLat starting latitude
+   * @param myLong starting longitude
+   * @param theirLat ending latitude
+   * @param theirLong ending longitude
+   */
+  calculateDistance(myLat: number, myLong: number, theirLat: number, theirLong: number): number {
+    if (myLat && myLong && theirLat && theirLong) {
+      // haversine distance
+      const earthRadius = 6371e3; // meters
+      const φ1 = myLat * (Math.PI / 180);
+      const φ2 = theirLat * (Math.PI / 180);
+      const Δφ = (theirLat - myLat) * (Math.PI / 180);
+      const Δλ = (theirLong - myLong) * (Math.PI / 180);
+
+      const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+              Math.cos(φ1) * Math.cos(φ2) *
+              Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+      const distMeters = earthRadius * c;
+
+      return distMeters;
+    }
+  }
+
   /** Getters and setters **/
-  
+
   public getMyLat(): number {
     return this.myLat;
   }

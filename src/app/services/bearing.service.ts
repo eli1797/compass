@@ -53,6 +53,27 @@ export class BearingService {
   }
 
   /**
+   * This function calculates the bearing to travel between locations
+   * @param myLat starting latitude
+   * @param myLong starting longitude
+   * @param theirLat ending latitude
+   * @param theirLong ending longitude
+   */
+  calculateBearing(myLat: number, myLong: number, theirLat: number, theirLong: number): number {
+    // check if all the required variables are defined
+    // fails if variables are 0, NaN, None
+    if (myLat && myLong && theirLat && theirLong) {
+      // formula is correct (I believe) after converting to radians
+      const longDif = (theirLong - myLong) * (Math.PI / 180);
+      const y = Math.sin(longDif) * Math.cos(theirLat * (Math.PI / 180));
+      const x = Math.cos(myLat * (Math.PI / 180)) * Math.sin(theirLat * (Math.PI / 180)) - Math.sin(myLat * (Math.PI / 180)) * Math.cos(theirLat * (Math.PI / 180)) * Math.cos(longDif);
+      const degBearing = Math.atan2(y, x) * (180 / Math.PI);
+
+      return degBearing;
+    }
+  }
+
+  /**
    * Getter for magnetic heading
    */
   public getMagneticHeading(): number {

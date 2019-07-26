@@ -31,7 +31,7 @@ export class BearingService {
   calculateBearing() {
     // check if all the required variables are defined
     // believe this fails if at 0
-    if (this.myLat && this.myLong && this.theirLat && this.theirLong && this.magneticHeading) {
+    if (this.myLat && this.myLong && this.theirLat && this.theirLong) {
 
       // formula is correct (I believe) after converting to radians
       const longDif = (this.theirLong - this.myLong) * (Math.PI / 180);
