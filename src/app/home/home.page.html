@@ -23,5 +23,7 @@
 
   <ion-label> Calculated Bearing: {{ this.bearingSerivce.navBearing }}deg</ion-label><br>
   <ion-label> Calculated Distance: {{ this.bearingSerivce.navDistance }}m</ion-label><br>
-  <ion-button (click)="calculateStats()" expand="full"> Calculate Bearing </ion-button><br>
+  <ion-button (click)="calculateStats()" expand="full"> Calculate Bearing </ion-button><br><br><br>
+
+  <ion-button [routerLink]="'./cloud-connect'" expand="full"> To Cloud-Connect </ion-button>
 </ion-content>
