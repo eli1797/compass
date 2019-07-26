@@ -12,6 +12,8 @@ import { BearingService } from '../bearing.service';
 })
 export class HomePage implements OnInit {
 
+  // watchButton = document.getElementById("watch");
+
   subscription;
 
   magneticHeading: any;

@@ -12,4 +12,8 @@ export class CloudConnectPage implements OnInit {
   ngOnInit() {
   }
 
+  lookupById() {
+    console.log("Lookup by Id");
+  }
+
 }

@@ -24,6 +24,8 @@ export class BearingService {
   navBearing: number;
   navDistance: number;
 
+  match: string;
+
   constructor(private deviceOrientation: DeviceOrientation, private geoLocation: Geolocation) {}
 
   calculateBearing() {
@@ -86,10 +88,15 @@ export class BearingService {
 
   subscribeLocation() {
     let watch = this.geoLocation.watchPosition();
-      watch.subscribe((data) => {
+    watch.subscribe((data) => {
       // data can be a set of coordinates, or an error (if an error occurred).
       this.myLat = data.coords.latitude;
       this.myLong = data.coords.longitude;
+
+      if (this.theirLat && this.theirLong) {
+        this.calculateDistance();
+        this.calculateBearing();
+      }
       });
   }
 
@@ -98,6 +105,20 @@ export class BearingService {
   this.subscription = this.deviceOrientation.watchHeading().subscribe((heading) => {
       this.magneticHeading = heading.magneticHeading;
       this.trueHeading = heading.trueHeading;
+
+      if (this.navBearing) {
+        const difference = Math.abs(this.magneticHeading - this.navBearing);
+        // strings are bad practice but trying to go quickly
+        if (difference < 10) {
+          this.match = "success";
+        } else if (difference < 400) {
+          this.match = "secondary";
+        } else if (difference < 80) {
+          this.match = "warning";
+        } else {
+          this.match = "danger";
+        }
+      }
     }, (err) => {
       console.log(err);
     });
@@ -108,6 +129,8 @@ export class BearingService {
   this.subscription.unsubscribe();
   this.magneticHeading = NaN;
   this.trueHeading = NaN;
+
+  this.match = "primary";
   }
 
   unsubscribeLocation() {
