@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
-import { DeviceOrientation, DeviceOrientationCompassHeading } from '@ionic-native/device-orientation/ngx';
 import { BearingService } from '../bearing.service';
 import { DiagnosticService } from '../services/diagnostic.service';
 
@@ -21,7 +20,6 @@ export class HomePage implements OnInit {
   trueHeading: any;
 
   constructor(
-    private deviceOrientation: DeviceOrientation, 
     public bearingSerivce: BearingService,  
     public platform: Platform,
     public diagnostic: DiagnosticService) {
