@@ -3,12 +3,13 @@ import { Platform } from '@ionic/angular';
 
 import { DeviceOrientation, DeviceOrientationCompassHeading } from '@ionic-native/device-orientation/ngx';
 import { BearingService } from '../bearing.service';
+import { DiagnosticService } from '../services/diagnostic.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  providers: [BearingService]
+  providers: [BearingService, DiagnosticService]
 })
 export class HomePage implements OnInit {
 
@@ -19,7 +20,11 @@ export class HomePage implements OnInit {
   magneticHeading: any;
   trueHeading: any;
 
-  constructor(private deviceOrientation: DeviceOrientation, public bearingSerivce: BearingService,  public platform: Platform) {
+  constructor(
+    private deviceOrientation: DeviceOrientation, 
+    public bearingSerivce: BearingService,  
+    public platform: Platform,
+    public diagnostic: DiagnosticService) {
     
   }
 
@@ -27,14 +32,22 @@ export class HomePage implements OnInit {
     this.bearingSerivce.setTheirLat(33.76);
     this.bearingSerivce.setTheirLong(-84.37);
 
+    
+
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      
+      // check and ask for location available
+      this.diagnostic.getLocationAvailable();
+
       this.bearingSerivce.logOrientation();
       this.bearingSerivce.subscribeOrientation();
       
       this.bearingSerivce.logLocation();
       this.bearingSerivce.subscribeLocation();
+
+      // this.diagnostic.openSettings();
     });
   }
 
