@@ -22,9 +22,7 @@ export class HomePage implements OnInit {
   constructor(
     public bearingSerivce: BearingService,  
     public platform: Platform,
-    public diagnostic: DiagnosticService) {
-    
-  }
+    public diagnostic: DiagnosticService) {}
 
   ngOnInit() {
     this.bearingSerivce.setTheirLat(33.76);

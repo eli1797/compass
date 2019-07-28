@@ -109,11 +109,11 @@ export class BearingService {
       if (this.navBearing) {
         const difference = Math.abs(this.magneticHeading - this.navBearing);
         // strings are bad practice but trying to go quickly
-        if (difference < 10) {
+        if (difference < 15) {
           this.match = "success";
-        } else if (difference < 30) {
+        } else if (difference < 40) {
           this.match = "secondary";
-        } else if (difference < 70) {
+        } else if (difference < 80) {
           this.match = "warning";
         } else {
           this.match = "danger";
