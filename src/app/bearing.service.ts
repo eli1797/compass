@@ -39,7 +39,7 @@ export class BearingService {
       const x = Math.cos(this.myLat * (Math.PI / 180)) * Math.sin(this.theirLat * (Math.PI / 180)) - Math.sin(this.myLat * (Math.PI / 180)) * Math.cos(this.theirLat * (Math.PI / 180)) * Math.cos(longDif);
       const degBearing = Math.atan2(y, x) * (180 / Math.PI);
 
-      this.navBearing = degBearing;
+      this.navBearing = Math.abs(degBearing);
       console.log("Bearing: ", this.navBearing);
     }
   }
@@ -111,9 +111,9 @@ export class BearingService {
         // strings are bad practice but trying to go quickly
         if (difference < 10) {
           this.match = "success";
-        } else if (difference < 400) {
+        } else if (difference < 30) {
           this.match = "secondary";
-        } else if (difference < 80) {
+        } else if (difference < 70) {
           this.match = "warning";
         } else {
           this.match = "danger";

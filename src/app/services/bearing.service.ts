@@ -69,7 +69,7 @@ export class BearingService {
       const x = Math.cos(myLat * (Math.PI / 180)) * Math.sin(theirLat * (Math.PI / 180)) - Math.sin(myLat * (Math.PI / 180)) * Math.cos(theirLat * (Math.PI / 180)) * Math.cos(longDif);
       const degBearing = Math.atan2(y, x) * (180 / Math.PI);
 
-      return degBearing;
+      return Math.abs(degBearing);
     }
   }
 
