@@ -30,6 +30,13 @@ ionic cordova plugin add cordova-plugin-geolocation
 npm install @ionic-native/geolocation
 ```
 
+**Diagnostic**
+(https://ionicframework.com/docs/native/diagnostic)
+
+```
+ionic cordova plugin add cordova.plugins.diagnostic
+npm install @ionic-native/diagnostic
+```
 
 **Toast**
 (https://ionicframework.com/docs/native/toast)
