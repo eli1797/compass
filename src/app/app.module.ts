@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { DeviceOrientation } from '@ionic-native/device-orientation/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { Toast } from '@ionic-native/toast/ngx';
 
 import { BearingService } from './bearing.service';
 
@@ -24,6 +26,8 @@ import { BearingService } from './bearing.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     DeviceOrientation,
     Geolocation,
+    Diagnostic,
+    Toast,
     BearingService
   ],
   bootstrap: [AppComponent]
