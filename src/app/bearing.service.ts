@@ -36,11 +36,12 @@ export class BearingService {
       // formula is correct (I believe) after converting to radians
       const longDif = (this.theirLong - this.myLong) * (Math.PI / 180);
       const y = Math.sin(longDif) * Math.cos(this.theirLat * (Math.PI / 180));
-      const x = Math.cos(this.myLat * (Math.PI / 180)) * Math.sin(this.theirLat * (Math.PI / 180)) - Math.sin(this.myLat * (Math.PI / 180)) * Math.cos(this.theirLat * (Math.PI / 180)) * Math.cos(longDif);
+      const x = Math.cos(this.myLat * (Math.PI / 180)) * Math.sin(this.theirLat * (Math.PI / 180)) -
+      Math.sin(this.myLat * (Math.PI / 180)) * Math.cos(this.theirLat * (Math.PI / 180)) * Math.cos(longDif);
       const degBearing = Math.atan2(y, x) * (180 / Math.PI);
 
       this.navBearing = Math.abs(degBearing);
-      console.log("Bearing: ", this.navBearing);
+      console.log('Bearing: ', this.navBearing);
     }
   }
 

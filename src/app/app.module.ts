@@ -16,10 +16,12 @@ import { Toast } from '@ionic-native/toast/ngx';
 
 import { BearingService } from './bearing.service';
 
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AmplifyAngularModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -28,7 +30,8 @@ import { BearingService } from './bearing.service';
     Geolocation,
     Diagnostic,
     Toast,
-    BearingService
+    BearingService,
+    AmplifyService
   ],
   bootstrap: [AppComponent]
 })

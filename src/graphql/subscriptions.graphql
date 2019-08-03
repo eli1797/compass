@@ -1,0 +1,25 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateLocation {
+  onCreateLocation {
+    id
+    name
+    latitude
+    longitude
+  }
+}
+subscription OnUpdateLocation {
+  onUpdateLocation {
+    id
+    name
+    latitude
+    longitude
+  }
+}
+subscription OnDeleteLocation {
+  onDeleteLocation {
+    id
+    name
+    latitude
+    longitude
+  }
+}

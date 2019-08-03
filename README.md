@@ -50,4 +50,20 @@ ionic cordova plugin add cordova-plugin-x-toast
 npm install @ionic-native/toast
 ```
 
+**AWS Amplify**
+(https://aws-amplify.github.io/docs/)
 
+```
+npm install -g @aws-amplify/cli
+amplify configure
+npm install --save aws-amplify aws-amplify-angular
+```
+
+Followed these docs for setup:
+(https://medium.com/@gerard.sans/build-your-first-full-stack-serverless-app-with-angular-and-aws-amplify-d2e4716de9bd)
+
+Then ran
+
+```
+amplify init
+```

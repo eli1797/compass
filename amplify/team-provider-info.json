@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "compass-dev-20190803173618-authRole",
+            "UnauthRoleArn": "arn:aws:iam::265086642687:role/compass-dev-20190803173618-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::265086642687:role/compass-dev-20190803173618-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "compass-dev-20190803173618-deployment",
+            "UnauthRoleName": "compass-dev-20190803173618-unauthRole",
+            "StackName": "compass-dev-20190803173618",
+            "StackId": "arn:aws:cloudformation:us-east-1:265086642687:stack/compass-dev-20190803173618/ba9ad7f0-b636-11e9-843e-1297d6a5b478"
+        }
+    }
+}

@@ -29,6 +29,8 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic-native/toast": "^5.11.0",
     "@ionic/angular": "^4.7.0",
+    "aws-amplify": "^1.1.35",
+    "aws-amplify-angular": "^3.0.10",
     "cordova-android": "8.0.0",
     "cordova-plugin-device-orientation": "^2.0.1",
     "cordova-plugin-geolocation": "^4.0.2",

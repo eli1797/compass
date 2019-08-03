@@ -6,7 +6,13 @@
 
 <ion-content>
   <br>
-  <ion-button expand="block">Upload location</ion-button><br>
+  <!-- Input with placeholder -->
+  <ion-item>
+    <ion-label position="floating">Enter your name</ion-label>
+    <ion-input [(ngModel)]="userName" type="text" id="name-input"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="createLocation()">Log Status</ion-button><br>
     
   <ion-item>
     <ion-label type="number" position="floating">Enter ID</ion-label>
@@ -14,6 +20,9 @@
   </ion-item><br>
 
   <ion-button (click)="lookupById()" expand="full"> Lookup by ID </ion-button><br>
+
+
+
 
   
 </ion-content>
