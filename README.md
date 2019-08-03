@@ -8,6 +8,10 @@ Helping you find things
 
 Using cordova for native mobile
 
+Run on android with `ionic cordova run android -l` after following
+[Android Setup](https://ionicframework.com/docs/installation/android)
+and maybe [Running on Android](https://ionicframework.com/docs/building/android)
+
 ## Branching Structure
 
 Create a personal branch
