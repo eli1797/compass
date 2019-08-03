@@ -1,57 +1,65 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
-import { DeviceOrientation, DeviceOrientationCompassHeading } from '@ionic-native/device-orientation/ngx';
-import { AngularDelegate } from '@ionic/angular';
+import { BearingService } from '../bearing.service';
+import { DiagnosticService } from '../services/diagnostic.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  providers: [BearingService, DiagnosticService]
 })
 export class HomePage implements OnInit {
+
+  // watchButton = document.getElementById("watch");
 
   subscription;
 
   magneticHeading: any;
   trueHeading: any;
 
-  latLongHardcoded: any = '34, -86';
-
-  constructor(private deviceOrientation: DeviceOrientation) {
-  }
+  constructor(
+    public bearingSerivce: BearingService,  
+    public platform: Platform,
+    public diagnostic: DiagnosticService) {}
 
   ngOnInit() {
-    this.logOrientation();
-  }
+    this.bearingSerivce.setTheirLat(33.76);
+    this.bearingSerivce.setTheirLong(-84.37);
 
-  logOrientation() {
-  // Get the device current compass heading
-  this.deviceOrientation.getCurrentHeading().then((heading) => {
-    this.magneticHeading = heading.magneticHeading;
-    this.trueHeading = heading.trueHeading;
-  }, (err) => {
-    console.log(err);
-  });
-  //   (data: DeviceOrientationCompassHeading) => console.log(data),
-  //   (error: any) => console.log(error)
-  // );
-  }
+    
 
-  subscribe() {
-  // Watch the device compass heading change
-  this.subscription = this.deviceOrientation.watchHeading().subscribe((heading) => {
-      this.magneticHeading = heading.magneticHeading;
-      this.trueHeading = heading.trueHeading;
-    }, (err) => {
-      console.log(err);
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      
+      // check and ask for location available
+      this.diagnostic.getLocationAvailable();
+
+      this.bearingSerivce.logOrientation();
+      this.bearingSerivce.subscribeOrientation();
+      
+      this.bearingSerivce.logLocation();
+      this.bearingSerivce.subscribeLocation();
+
+      // this.diagnostic.openSettings();
     });
   }
 
-  unsubscribe() {
-  // Stop watching heading change
-  this.subscription.unsubscribe();
-  this.magneticHeading = '';
-  this.trueHeading = '';
+  watchMe() {
+    this.bearingSerivce.subscribeOrientation();
+    this.bearingSerivce.subscribeLocation();
+  }
+
+  stopWatching() {
+    this.bearingSerivce.unsubscribeOrientation();
+    this.bearingSerivce.unsubscribeLocation();
+  }
+
+  calculateStats() {
+    this.bearingSerivce.calculateBearing();
+    this.bearingSerivce.calculateDistance();
   }
 
 }
