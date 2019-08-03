@@ -18,6 +18,8 @@ import { BearingService } from './bearing.service';
 
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -31,7 +33,8 @@ import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
     Diagnostic,
     Toast,
     BearingService,
-    AmplifyService
+    AmplifyService,
+    UniqueDeviceID
   ],
   bootstrap: [AppComponent]
 })

@@ -4,6 +4,8 @@ import { LocationService } from '../services/location.service';
 
 import { APIService } from '../API.service';
 
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+
 @Component({
   selector: 'app-cloud-connect',
   templateUrl: './cloud-connect.page.html',
@@ -13,11 +15,13 @@ export class CloudConnectPage implements OnInit {
 
   userName: string;
   statusDescription: string;
+  id: any;
 
   constructor(
     public platform: Platform,
     private locationService: LocationService,
-    private api: APIService) { }
+    private api: APIService,
+    private uuid: UniqueDeviceID) { }
 
   ngOnInit() {
     this.platform.ready().then(() => {
@@ -30,9 +34,12 @@ export class CloudConnectPage implements OnInit {
 
   async createLocation() {
 
+    this.uuid.get()
+    .then((uuid: any) => this.id)
+    .catch((error: any) => console.log(error));
 
     const newStatus = {
-      id: (Math.random() * 1000) + '',
+      id: this.id,
       name: this.userName,
       latitude: this.locationService.getMyLat(),
       longitude: this.locationService.getMyLong()

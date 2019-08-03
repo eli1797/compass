@@ -67,3 +67,11 @@ Then ran
 ```
 amplify init
 ```
+
+**UUID**
+(https://ionicframework.com/docs/native/unique-device-id)
+
+```
+ionic cordova plugin add cordova-plugin-uniquedeviceid
+npm install @ionic-native/unique-device-id
+```
