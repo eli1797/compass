@@ -29,9 +29,14 @@
       <ion-label> {{ location.latitude }} </ion-label>
       <ion-label> {{ location.longitude }} </ion-label>
 		</ion-item>
-  </ion-list>
+  </ion-list><br><br>
 
-  <ion-button [color]="this.bearingService.match" expand="full"> Calculate Bearing </ion-button><br><br><br>
+  <ion-label>My Lat = {{ this.bearingService.getMyLat() }}</ion-label><br>
+  <ion-label>My Long = {{ this.bearingService.getMyLong() }}</ion-label><br>
+  <ion-label>Magnetic Heading: {{ this.bearingService.magneticHeading }}</ion-label><br>
+  <ion-label> Calculated Bearing: {{ this.bearingService.navBearing }}deg</ion-label><br><br>
+
+  <ion-button [color]="this.bearingService.match" expand="full"> Pointed to {{ this.theirName }} </ion-button><br><br><br>
 
 
   

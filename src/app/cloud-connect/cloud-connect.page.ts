@@ -24,7 +24,7 @@ export class CloudConnectPage implements OnInit {
 
   private theirLat: number;
   private theirLong: number;
-  private theirName: string;
+  theirName: string;
 
   allLocations: any;
 
