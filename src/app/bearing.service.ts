@@ -88,6 +88,10 @@ export class BearingService {
   }
 
   subscribeLocation() {
+    class PositionOptions {
+      enableHighAccuracy: boolean = true;
+    };
+    this.geoLocation.watchPosition(new PositionOptions);
     let watch = this.geoLocation.watchPosition();
     watch.subscribe((data) => {
       // data can be a set of coordinates, or an error (if an error occurred).
