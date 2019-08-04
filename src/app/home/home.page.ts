@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   trueHeading: any;
 
   constructor(
-    public bearingSerivce: BearingService,  
+    public bearingSerivce: BearingService,
     public platform: Platform,
     public diagnostic: DiagnosticService) {}
 
@@ -28,7 +28,6 @@ export class HomePage implements OnInit {
     this.bearingSerivce.setTheirLat(33.76);
     this.bearingSerivce.setTheirLong(-84.37);
 
-    
 
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

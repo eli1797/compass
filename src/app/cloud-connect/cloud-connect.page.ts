@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { LocationService } from '../services/location.service';
+import { BearingService } from '../services/bearing.service';
 
 import { APIService } from '../API.service';
 
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+import { DiagnosticService } from '../services/diagnostic.service';
+
 
 @Component({
   selector: 'app-cloud-connect',
   templateUrl: './cloud-connect.page.html',
   styleUrls: ['./cloud-connect.page.scss'],
+  providers: [DiagnosticService]
 })
 export class CloudConnectPage implements OnInit {
 
@@ -17,20 +21,29 @@ export class CloudConnectPage implements OnInit {
   statusDescription: string;
   id: any;
 
-  allLocations: any;
+  private theirLat: number;
+  private theirLong: number;
+  private theirName: string;
+
+  private allLocations: any;
 
   constructor(
     public platform: Platform,
     private locationService: LocationService,
+    private bearingService: BearingService,
     private api: APIService,
+    public diagnostic: DiagnosticService,
     private uuid: UniqueDeviceID) { }
 
   ngOnInit() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      this.diagnostic.getLocationAvailable();
+
       this.locationService.logLocation();
       this.locationService.subscribeLocation();
+      this.bearingService.subscribeOrientation();
     });
   }
 
@@ -54,17 +67,19 @@ export class CloudConnectPage implements OnInit {
     console.log(result);
   }
 
+  setFindee(location) {
+    console.log(location);
+    this.theirName = location.name;
+
+    this.theirLat = location.latitude;
+    this.theirLong = location.longitude;
+  }
+
 
   async listLocations() {
     const cloudLocations = await this.api.ListLocations();
 
     this.allLocations = cloudLocations.items;
   }
-
-  // async lookupById(inputId) {
-  //   console.log('Lookup by Id');
-
-  //   return await this.api.GetLocation(inputId);
-  // }
 
 }

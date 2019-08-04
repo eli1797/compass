@@ -24,12 +24,12 @@
   <ion-button (click)="listLocations()" expand="full"> List all Locations </ion-button><br>
 
   <ion-list>
-		<ion-item *ngFor="let location of this.allLocations">
+		<ion-item (click)="this.setFindee(location)" *ngFor="let location of this.allLocations">
       <ion-label> {{ location.name }} </ion-label>
       <ion-label> {{ location.latitude }} </ion-label>
       <ion-label> {{ location.longitude }} </ion-label>
 		</ion-item>
-	</ion-list>
+  </ion-list>
 
 
   
