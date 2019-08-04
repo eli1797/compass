@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { LocationService } from '../services/location.service';
-import { BearingService } from '../services/bearing.service';
+// import { LocationService } from '../services/location.service';
+// import { BearingService } from '../services/bearing.service';
 
 import { APIService } from '../API.service';
 
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 import { DiagnosticService } from '../services/diagnostic.service';
+import { BearingService } from '../bearing.service';
 
 
 @Component({
@@ -25,12 +26,11 @@ export class CloudConnectPage implements OnInit {
   private theirLong: number;
   private theirName: string;
 
-  private allLocations: any;
+  allLocations: any;
 
   constructor(
     public platform: Platform,
-    private locationService: LocationService,
-    private bearingService: BearingService,
+    public bearingService: BearingService,
     private api: APIService,
     public diagnostic: DiagnosticService,
     private uuid: UniqueDeviceID) { }
@@ -41,8 +41,7 @@ export class CloudConnectPage implements OnInit {
       // Here you can do any higher level native things you might need.
       this.diagnostic.getLocationAvailable();
 
-      this.locationService.logLocation();
-      this.locationService.subscribeLocation();
+      this.bearingService.subscribeLocation();
       this.bearingService.subscribeOrientation();
     });
   }
@@ -56,8 +55,8 @@ export class CloudConnectPage implements OnInit {
     const newStatus = {
       id: this.id,
       name: this.userName,
-      latitude: this.locationService.getMyLat(),
-      longitude: this.locationService.getMyLong()
+      latitude: this.bearingService.getMyLat(),
+      longitude: this.bearingService.getMyLong()
     };
 
 
@@ -69,10 +68,11 @@ export class CloudConnectPage implements OnInit {
 
   setFindee(location) {
     console.log(location);
+
     this.theirName = location.name;
 
-    this.theirLat = location.latitude;
-    this.theirLong = location.longitude;
+    this.bearingService.setTheirLat(location.latitude);
+    this.bearingService.setTheirLong(location.longitude);
   }
 
 
