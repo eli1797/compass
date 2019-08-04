@@ -17,6 +17,8 @@ export class CloudConnectPage implements OnInit {
   statusDescription: string;
   id: any;
 
+  allLocations: any;
+
   constructor(
     public platform: Platform,
     private locationService: LocationService,
@@ -47,15 +49,22 @@ export class CloudConnectPage implements OnInit {
 
 
     // mutation to create location
-    let result = await this.api.CreateLocation(newStatus);
+    const result = await this.api.CreateLocation(newStatus);
 
     console.log(result);
-
-
   }
 
-  lookupById() {
-    console.log('Lookup by Id');
+
+  async listLocations() {
+    const cloudLocations = await this.api.ListLocations();
+
+    this.allLocations = cloudLocations.items;
   }
+
+  // async lookupById(inputId) {
+  //   console.log('Lookup by Id');
+
+  //   return await this.api.GetLocation(inputId);
+  // }
 
 }

@@ -14,14 +14,22 @@
 
   <ion-button expand="block" (click)="createLocation()">Log Status</ion-button><br>
     
-  <ion-item>
+  <!-- <ion-item>
     <ion-label type="number" position="floating">Enter ID</ion-label>
     <ion-input></ion-input>
   </ion-item><br>
 
-  <ion-button (click)="lookupById()" expand="full"> Lookup by ID </ion-button><br>
+  <ion-button (click)="lookupById()" expand="full"> Lookup by ID </ion-button><br> -->
 
+  <ion-button (click)="listLocations()" expand="full"> List all Locations </ion-button><br>
 
+  <ion-list>
+		<ion-item *ngFor="let location of this.allLocations">
+      <ion-label> {{ location.name }} </ion-label>
+      <ion-label> {{ location.latitude }} </ion-label>
+      <ion-label> {{ location.longitude }} </ion-label>
+		</ion-item>
+	</ion-list>
 
 
   
