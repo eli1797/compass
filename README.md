@@ -2,7 +2,7 @@
 
 Hotter... colder... colder... hotter...
 
-Helping you find things and people.
+Helping you find things and people.  
 Last 100ft navigation.
 
 ### Details
@@ -49,8 +49,8 @@ npm install @ionic-native/toast
 
 ### Learned
 
-Works but not as consistently as I'd like.
-Looking forward to two tech improvements:
-Ultra Wideband Tech (Apple's U1 Chip)
-Dual Band GPS (Addition of new lower-L band GPS)
+Works but not as consistently as I'd like.  
+Looking forward to two tech improvements:  
+Ultra Wideband Tech (Apple's U1 Chip)  
+Dual Band GPS (Addition of new lower-L band GPS)  
 
