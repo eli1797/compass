@@ -1,8 +1,9 @@
 # compass
 
-Hotter... hotter... colder... hotter...
+Hotter... colder... colder... hotter...
 
-Helping you find things
+Helping you find things and people.
+Last 100ft navigation.
 
 ### Details
 
@@ -11,10 +12,6 @@ Using cordova for native mobile
 Run on android with `ionic cordova run android -l` after following
 [Android Setup](https://ionicframework.com/docs/installation/android)
 and maybe [Running on Android](https://ionicframework.com/docs/building/android)
-
-## Branching Structure
-
-Create a personal branch
 
 ### Required Installations:
 
@@ -50,4 +47,10 @@ ionic cordova plugin add cordova-plugin-x-toast
 npm install @ionic-native/toast
 ```
 
+### Learned
+
+Works but not as consistently as I'd like.
+Looking forward to two tech improvements:
+Ultra Wideband Tech (Apple's U1 Chip)
+Dual Band GPS (Addition of new lower-L band GPS)
 
